@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- heart是组件的一个属性，那么组件必须通过props声明这个属性 -->
+       
+        <weijiao-v2>
+            <template v-slot:title>
+                {{article.title}}
+            </template>
+            <template v-slot:author>
+                {{article.author}}
+            </template>
+            <template v-slot:date>
+                {{article.publishDate}}
+            </template>
+            {{article.content}}
+        </weijiao-v2>
+    </div>
+    <script>
+        
+        Vue.component('weijiao-v2',{
+            
+            template:'<div>'+
+                '<h1><slot name="title"></slot></h1>'+
+                '<h2><slot name="author"></slot></h2>'+
+                '<h3><slot name="date"></slot></h3>'+
+                '<p><slot></slot></p>'+
+            '</div>'
+        });
+            var app=new Vue({
+                el:"#app",
+                data:{
+         
+                  article:
+                        {
+                            title:"论法的精神",
+                            author:"孟德斯鸠",
+                            publishDate:"2019-12-13",
+                            content:"着重论述了法律的定义、法律和政体的关系、政体的种类以及它们各自的原则。",
+                            
+                        }
+                       
+                   }
+            })
+        </script>
+</body>
+</html>

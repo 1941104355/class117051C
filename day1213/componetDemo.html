@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <h1>{{article.title}}</h1>
+        <h2>作者：{{article.author}}</h2>
+        <h3>{{article.publishDate}}</h3>
+        <p>
+            <img :src="article.imgSrc" style="width:100px;height:120px"/><br/>
+            {{article.content}}
+        </p> -->
+
+        <!-- heart是组件的一个属性，那么组件必须通过props声明这个属性 -->
+        <!-- <weijiao v-bind:heart="article"></weijiao>
+        <weijiao v-bind:heart="article2"></weijiao> -->
+        <weijiao v-for="article in articleList" :key="article.title" :heart="article"></weijiao>
+    </div>
+    <script>
+        //定义weijiao这个自定义组件
+        //第一个参数是自定义组件的标签名称，第二个参数是定义该组件的运行规则对象
+        Vue.component('weijiao',{
+            props:['heart'],
+            //template中定义的是组件的模板 也就是html{{}}以及vue指令的组合
+            //template必须要有根标签 例如<h1></h1><h2></h2>不合法，用div括起来合法
+            template:'<div>'+
+                        '<h1 style="color:red">{{heart.title}}</h1>'+
+                        '<h2>作者：{{heart.author}}</h2>'+
+                        '<h3>时间：{{heart.publishDate}}</h3>'+
+                        '<p>{{heart.content}}</p>'+
+                     '</div>'
+        })
+            var app=new Vue({
+                el:"#app",
+                data:{
+                //   article:{
+                //       title:"论法的精神",
+                //       author:"孟德斯鸠",
+                //       publishDate:"2019-12-13",
+                //       content:"人生而自由 ，无往而不在枷锁之中。",
+                //       //imgSrc:"http://img3.imgtn.bdimg.com/it/u=2963697101,2936697392&fm=26&gp=0.jpg"
+                //   },
+                //   article2:{
+                //       title:"你是人间四月天",
+                //       author:"林徽因",
+                //       publishDate:"2019-12-13",
+                //       content:"24325432653463",
+                      
+                //   },
+                  articleList:[
+                        {
+                            title:"论法的精神",
+                            author:"孟德斯鸠",
+                            publishDate:"2019-12-13",
+                            content:"着重论述了法律的定义、法律和政体的关系、政体的种类以及它们各自的原则。",
+                            //imgSrc:"http://img3.imgtn.bdimg.com/it/u=2963697101,2936697392&fm=26&gp=0.jpg"
+                        },
+                        {
+                            title:"你是人间四月天",
+                            author:"林徽因",
+                            publishDate:"2019-12-13",
+                            content:"我说 你是人间的四月天；笑响点亮了四面风；轻灵在春的光艳中交舞着变。",
+                            
+                        },
+                        {
+                            title:"人间词话",
+                            author:"王国维",
+                            publishDate:"2019-12-13",
+                            content:"词以境界为最上。有境界，则自成高格，自有名句。五代、北宋之词所以独绝者在此。",
+                            
+                        },
+                        {
+                            title:"你的孤独，虽败犹荣",
+                            author:"刘同",
+                            publishDate:"2019-12-13",
+                            content:"不合群是一个人的孤独，合群是一群人的孤独！",
+                            
+                        }
+                  ]
+                }
+            })
+        </script>
+</body>
+</html>
